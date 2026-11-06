@@ -1,8 +1,8 @@
 # Valida Julgado
 
 Plugin para advogados que precisam conferir citações de julgados brasileiros antes de
-usá-las. Ele confere o dígito verificador do número CNJ, orienta a leitura da íntegra,
-compara a decisão com o que a citação afirma e registra o resultado em uma ficha.
+usá-las. Ele orienta a conferência do dígito verificador do número CNJ e a leitura da
+íntegra, compara a decisão com o que a citação afirma e registra o resultado em uma ficha.
 
 ## Uso jurídico: revisão obrigatória
 
@@ -13,21 +13,16 @@ orientação precisa ser informado claramente de que houve uso de IA.
 
 ## O que o plugin executa, envia ou busca
 
-- **Executa** apenas `skills/valida-julgado/scripts/valida_cnj.py`, na máquina do
-  usuário, só com a biblioteca padrão do Python. O script não acessa a rede e não grava
-  arquivos.
+- **Executa:** nada por conta própria. O plugin contém só instruções em texto para o
+  Claude. Não tem script, conector, hook nem endereço remoto, e não coleta dados. Para a
+  conta do DV, o Claude pode usar a ferramenta de cálculo que a sessão já tenha, inclusive
+  execução de código da própria sessão, sob as permissões do usuário.
 - **Grava** a ficha `verificacao-julgados.md` na pasta de trabalho, por meio do Claude.
-- **Envia ou busca:** nada por conta própria. O plugin não tem conector, hook nem endereço
-  remoto, e não coleta dados. Se a sessão já tiver pesquisa de jurisprudência ou acesso à
-  web, a skill pergunta antes de usar.
+- **Envia ou busca:** nada por conta própria. Se a sessão já tiver pesquisa de
+  jurisprudência ou acesso à web, a skill pergunta antes de usar.
 
-Os documentos que o usuário fornece são lidos pelo Claude, conforme a conta e as
+Os documentos que o usuário indica são lidos pelo Claude, conforme a conta e as
 configurações de dados do próprio usuário.
-
-## Requisito
-
-Python 3 (testado no 3.11), para conferir o dígito verificador. Sem ele, a ficha registra
-"DV não conferido".
 
 ## Exemplos de uso
 
@@ -55,6 +50,24 @@ Os números abaixo são fictícios.
    O Claude confere os números, aponta sinais de citação gerada por IA e pede as íntegras
    que faltam.
 
+## Dados de teste
+
+O plugin não tem conta, login nem serviço. Para testar, use os arquivos fictícios da pasta
+`examples/` e peça:
+
+> Valide a lista `lista-ficticia.md` usando os acórdãos `acordao-0000001.md` e
+> `acordao-0000003.md`.
+
+Resultado esperado:
+
+| Item | Status | Motivo |
+|---|---|---|
+| 1 | `DIVERGENTE` | O voto afasta o pagamento retroativo que a lista atribui à decisão |
+| 2 | `NÚMERO INVÁLIDO` | DV esperado 93 |
+| 3 | `NÃO LOCALIZADO` | Sem íntegra; a data de julgamento cai em um sábado |
+| 4 | `NÃO LOCALIZADO` | Sem íntegra; o DV não se aplica a REsp |
+| 5 | `ÍNTEGRA SEM ORIGEM CONFERIDA` | A citação confere, mas o arquivo não tem origem oficial |
+
 ## Status da ficha
 
 | Status | Significado |
@@ -66,17 +79,33 @@ Os números abaixo são fictícios.
 | `NÃO LOCALIZADO` | Decisão não encontrada; conferência manual pendente |
 | `NÚMERO INVÁLIDO` | DV ou formato não obedece ao padrão CNJ |
 
+## Solução de problemas
+
+- **A skill não foi acionada:** confira se o plugin está ativo e peça de forma direta,
+  como "valide estes julgados" ou "use a skill valida-julgado".
+- **"DV não conferido":** os dois cálculos não bateram. Peça para refazer a conta, ou
+  confira o número no portal do tribunal. Esse resultado não significa que o número seja
+  inválido.
+- **`NÃO LOCALIZADO`:** falta a decisão. Baixe a íntegra no portal do tribunal e indique o
+  arquivo.
+- **`ÍNTEGRA SEM ORIGEM CONFERIDA`:** informe de onde veio o arquivo, ou confira a decisão
+  no portal do tribunal.
+- **PDF não lido:** se o arquivo for escaneado ou estiver protegido, forneça uma cópia com
+  texto legível.
+- **A ficha não apareceu na pasta:** sem pasta de trabalho, como na conversa pelo
+  navegador ou pelo celular, a ficha vem na própria resposta.
+
 ## Limites
 
 - DV correto não prova que o processo exista. A regra está na
   [Resolução CNJ nº 65/2008](https://atos.cnj.jus.br/atos/detalhar/119), art. 1º, § 2º, e
   Anexo VIII.
+- A conta do DV é feita pelo Claude, sem programa próprio, e pode errar. Ele faz dois
+  cálculos independentes e, se não baterem, registra "DV não conferido".
 - O plugin não verifica reforma posterior, trânsito em julgado nem vigência do
   entendimento.
 - O plugin não atesta a autenticidade de arquivo sem origem oficial.
 - O plugin não faz triagem de malware nem de texto oculto nos arquivos.
-- A varredura por `--arquivo` lê só arquivo de texto. PDF e Word exigem extrair o texto
-  antes; o script avisa e sai com código 2.
 
 ## Privacidade
 
@@ -88,8 +117,9 @@ usuário. Os autores não recebem o conteúdo dos documentos nem da ficha. Veja 
 
 Marcos Eduardo Miranda e Eduardo Miranda Sociedade de Advogados.
 
-## Suporte
+## Suporte e segurança
 
+Dúvidas, problemas e relatos de vulnerabilidade de segurança:
 contato@mirandaadv.com.br
 
 ## Licença
@@ -98,7 +128,8 @@ MIT. Veja o arquivo `LICENSE`.
 
 ## English summary
 
-Valida Julgado helps lawyers check citations of Brazilian court decisions. It validates
-the check digit of CNJ case numbers with a local script, guides a full reading of the
-decision, compares it with the citation and records a status sheet. It has no connector,
-hook or remote endpoint. A qualified professional must review the output.
+Valida Julgado helps lawyers check citations of Brazilian court decisions. It guides the
+check of the CNJ case-number check digit using the official method, a full reading of the
+decision and a comparison with the citation, and it records a status sheet. The plugin
+contains only text instructions: no script, connector, hook or remote endpoint. A
+qualified professional must review the output. Sample data is in `examples/`.
