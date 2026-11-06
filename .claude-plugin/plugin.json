@@ -1,0 +1,12 @@
+{
+  "name": "valida-julgado",
+  "displayName": "Valida Julgado",
+  "version": "0.1.0",
+  "description": "Confere citações de julgados brasileiros: dígito verificador do número CNJ, leitura da íntegra e ficha com o status de cada decisão, para revisão por advogado.",
+  "author": {
+    "name": "Marcos Eduardo Miranda e Eduardo Miranda Sociedade de Advogados",
+    "email": "contato@mirandaadv.com.br"
+  },
+  "license": "MIT",
+  "keywords": ["direito", "jurisprudencia", "brasil", "cnj", "acordao"]
+}
