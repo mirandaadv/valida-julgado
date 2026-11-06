@@ -8,5 +8,6 @@
     "email": "contato@mirandaadv.com.br"
   },
   "license": "MIT",
+  "privacyPolicyUrl": "https://github.com/mirandaadv/valida-julgado/blob/main/PRIVACY.md",
   "keywords": ["direito", "jurisprudencia", "brasil", "cnj", "acordao"]
 }

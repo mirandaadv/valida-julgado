@@ -78,6 +78,12 @@ Os números abaixo são fictícios.
 - A varredura por `--arquivo` lê só arquivo de texto. PDF e Word exigem extrair o texto
   antes; o script avisa e sai com código 2.
 
+## Privacidade
+
+A ficha pode conter nomes de partes e magistrados e fica só na pasta de trabalho do
+usuário. Os autores não recebem o conteúdo dos documentos nem da ficha. Veja a
+[política de privacidade](PRIVACY.md).
+
 ## Autoria
 
 Marcos Eduardo Miranda e Eduardo Miranda Sociedade de Advogados.
