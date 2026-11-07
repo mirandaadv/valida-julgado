@@ -1,15 +1,42 @@
+![Ícone do Valida Julgado](assets/icone.png)
+
 # Valida Julgado
 
-Plugin para advogados que precisam conferir citações de julgados brasileiros antes de
-usá-las. Ele orienta a conferência do dígito verificador do número CNJ e a leitura da
-íntegra, compara a decisão com o que a citação afirma e registra o resultado em uma ficha.
+**Confere citações de julgados brasileiros antes de o advogado usá-las.** O plugin orienta
+a conferência do dígito verificador do número CNJ e a leitura da íntegra, compara a decisão
+com o que a citação afirma e registra o resultado em uma ficha.
+
+> **Revisão obrigatória.** O plugin não dá orientação jurídica nem decide o que citar. Um
+> profissional qualificado precisa revisar o resultado, e quem receber a orientação precisa
+> ser informado de que houve uso de IA.
+
+![Fluxo do plugin: número citado, dígito verificador, íntegra da decisão, comparação e ficha com status](assets/fluxo.png)
+
+## Exemplo de ficha
+
+Dados fictícios, da pasta `examples/`:
+
+```text
+## 0000001-93.1900.8.26.0000 — 1ª Câmara de Direito Público, Rel. Fulano de Tal, j. 10/03/2020
+- Status: DIVERGENTE
+- DV: correto (prova=1, DV esperado=93)
+- Origem da íntegra: arquivo sem origem oficial — lida em 07/11/2026
+- Resultado e votação: recurso desprovido, por unanimidade
+- Citação x decisão: diverge em: a lista atribui pagamento retroativo; o voto o afasta
+- Ementa x voto: ementa mais ampla que o voto
+- Sinais e ocorrências: marcador "[1]" sem referência correspondente
+
+## 0000001-00.1900.8.26.0000 — 2ª Câmara de Direito Público, Rel. Beltrano de Tal, j. 11/03/2020
+- Status: NÚMERO INVÁLIDO
+- DV: inválido (esperado 93)
+```
 
 ## Uso jurídico: revisão obrigatória
 
-O plugin não dá orientação jurídica nem decide o que citar. Trabalho jurídico é caso de
-alto risco na [Política de Uso da Anthropic](https://www.anthropic.com/legal/aup): um
-profissional qualificado precisa revisar o resultado e poder alterá-lo, e quem receber a
-orientação precisa ser informado claramente de que houve uso de IA.
+Trabalho jurídico é caso de alto risco na
+[Política de Uso da Anthropic](https://www.anthropic.com/legal/aup): um profissional
+qualificado precisa revisar o resultado e poder alterá-lo, e quem receber a orientação
+precisa ser informado claramente de que houve uso de IA.
 
 ## O que o plugin executa, envia ou busca
 
@@ -120,7 +147,9 @@ Marcos Eduardo Miranda e Eduardo Miranda Sociedade de Advogados.
 ## Suporte e segurança
 
 Dúvidas, problemas e relatos de vulnerabilidade de segurança:
-contato@mirandaadv.com.br
+contato@mirandaadv.com.br. Para relatos de segurança, veja também a
+[política de segurança](SECURITY.md). As mudanças de cada versão estão no
+[histórico de versões](CHANGELOG.md).
 
 ## Licença
 
@@ -132,4 +161,5 @@ Valida Julgado helps lawyers check citations of Brazilian court decisions. It gu
 check of the CNJ case-number check digit using the official method, a full reading of the
 decision and a comparison with the citation, and it records a status sheet. The plugin
 contains only text instructions: no script, connector, hook or remote endpoint. A
-qualified professional must review the output. Sample data is in `examples/`.
+qualified professional must review the output. Sample data is in `examples/`. Security
+reports: see `SECURITY.md`.
