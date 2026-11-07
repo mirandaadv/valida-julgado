@@ -7,7 +7,12 @@
     "name": "Marcos Eduardo Miranda e Eduardo Miranda Sociedade de Advogados",
     "email": "contato@mirandaadv.com.br"
   },
+  "homepage": "https://github.com/mirandaadv/valida-julgado",
+  "repository": "https://github.com/mirandaadv/valida-julgado",
   "license": "MIT",
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/mirandaadv/valida-julgado#readme",
+  "supportUrl": "https://github.com/mirandaadv/valida-julgado#suporte-e-seguran%C3%A7a",
   "privacyPolicyUrl": "https://github.com/mirandaadv/valida-julgado/blob/main/PRIVACY.md",
   "keywords": ["direito", "jurisprudencia", "brasil", "cnj", "acordao"]
 }
