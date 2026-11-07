@@ -2,8 +2,9 @@
 
 ## Não lançado
 
-- Apresentação do repositório: ícone e fluxo no README, exemplo de ficha, política de
-  segurança (`SECURITY.md`) e este histórico.
+- Apresentação do repositório: README reorganizado, com ícone, animação do fluxo,
+  resumo, exemplo de ficha e diagrama de decisão dos status; política de segurança
+  (`SECURITY.md`) e este histórico.
 
 ## 0.1.0 — enviado ao diretório em 07/11/2026
 
